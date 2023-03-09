@@ -29,6 +29,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 
 - `POST /homellc/users/signup`: Create a new user account. Send a JSON object with the following fields in the request body:
 
+```json
 {
   "firstName": "james",
   "lastName": "bond",
@@ -40,6 +41,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 
 
 - `POST /homellc/users/login`: Log in to an existing user account. Send a JSON object with the following fields in the request body:
+```json
 {
   "email": "jamesbond007@gmail.com",
   "password": "yourpassword"
@@ -47,7 +49,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 
 
 - `POST /homellc/passwords/forgot-password`: Send an email to the user with a link to reset their password. Send a JSON object with the following fields in the request body:
-
+```json
 {
   "firstName": "james",
   "lastName": "bond",
@@ -58,7 +60,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 
 
 - `POST /homellc/passwords/reset-password/:token`: Reset a user's password using a token sent to their email address. Send a JSON object with the following fields in the request body:
-
+```json
 {
   "email": "jamesbond007@gmail.com",
   "password": "newmission"
