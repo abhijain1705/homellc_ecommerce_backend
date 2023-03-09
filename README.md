@@ -37,7 +37,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
   "phoneNumber": "+919876543210",
   "dateOfJoining": "2023-03-08T17:58:21.964Z",
   "password": "yourpassword"
-}
+}```
 
 
 - `POST /homellc/users/login`: Log in to an existing user account. Send a JSON object with the following fields in the request body:
@@ -45,7 +45,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 {
   "email": "jamesbond007@gmail.com",
   "password": "yourpassword"
-}
+}```
 
 
 - `POST /homellc/passwords/forgot-password`: Send an email to the user with a link to reset their password. Send a JSON object with the following fields in the request body:
@@ -56,7 +56,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
   "email": "jamesbond007@gmail.com",
   "phoneNumber": "+919876543210",
   "createdAt": "2023-03-08T17:58:21.964Z"
-}
+}```
 
 
 - `POST /homellc/passwords/reset-password/:token`: Reset a user's password using a token sent to their email address. Send a JSON object with the following fields in the request body:
@@ -64,7 +64,7 @@ To use this API, make HTTP requests to the appropriate endpoints using a tool li
 {
   "email": "jamesbond007@gmail.com",
   "password": "newmission"
-}
+}```
 
 ## Technologies Used
 
