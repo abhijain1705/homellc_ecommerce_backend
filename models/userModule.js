@@ -7,7 +7,8 @@ const schema = mongoose.Schema({
     email: { type: String, required: true, unique: true },
     phoneNumber: { type: String, required: true },
     dateOfJoining: { type: Date, default: Date.now() },
-    password: { type: String, required: true }
+    password: { type: String, required: true },
+    remember: { type: Boolean, required: true }
 });
 schema.plugin(uniqueValidator);
 

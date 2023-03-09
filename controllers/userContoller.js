@@ -1,7 +1,27 @@
 const UserSchema = require("../models/userModule");
 const crypto = require('crypto');
+const emailValidator = require('email-validator');
+const phoneValidator = require('phone');
 
 module.exports.AddUser = async (req, res) => {
+
+    const { email, phone, password } = req.body;
+
+    // Validate email format using email-validator package
+    if (!emailValidator.validate(email)) {
+        return res.status(400).json({ error: 'Invalid email format' });
+    }
+
+    // Validate phone number format using phone package
+    if (!phoneValidator.validate(phone)) {
+        return res.status(400).json({ error: 'Invalid phone number format' });
+    }
+
+    // Validate password length
+    if (password.length < 6) {
+        return res.status(400).json({ error: 'Password must be at least 6 characters long' });
+    }
+
     // Hash the password using a secure hashing algorithm such as SHA256
     const hashedPassword = crypto.createHash('sha256').update(req.body.password).digest('hex');
     const tempUser = { ...req.body };

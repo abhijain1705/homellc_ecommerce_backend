@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "npm install"
   },
   "author": "abhi jain",
   "license": "ISC",
@@ -14,10 +15,12 @@
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.3",
+    "email-validator": "^2.0.4",
     "express": "^4.18.2",
     "mongoose": "^6.0.0",
     "mongoose-unique-validator": "^3.1.0",
     "nodemailer": "^6.9.1",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "phone": "^3.1.35"
   }
 }
