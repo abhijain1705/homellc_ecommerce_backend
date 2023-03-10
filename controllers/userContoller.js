@@ -55,11 +55,12 @@ module.exports.LoginUser = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect email or password' });
         }
 
+        // Update the remember property of the user
         user.remember = req.body.remember;
-        const newUser = new UserSchema({ ...user });
-        await newUser.save()
-            .then(user => res.status(201).json(user))
-            .catch(err => res.status(500).json({ error: err.message }));
+        await user.save();
+
+        // Return success response
+        return res.status(200).json({ message: 'Login successful' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
