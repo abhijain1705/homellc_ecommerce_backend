@@ -36,7 +36,7 @@ module.exports.AddUser = async (req, res) => {
         .catch(err => res.status(500).json({ error: err.message }));
 }
 
-module.exports.GetCurrentUser = async (req, res) => {
+module.exports.LoginUser = async (req, res) => {
     // Hash the password using the same algorithm and parameters as when it was originally hashed
     const hashedPassword = crypto.createHash('sha256').update(req.body.password).digest('hex');
 
