@@ -1,19 +1,20 @@
 const UserSchema = require("../models/userModule");
 const crypto = require('crypto');
 const emailValidator = require('email-validator');
-const phoneValidator = require('phone');
+const validatePhoneNumber = require('validate-phone-number-node-js');
 
 module.exports.AddUser = async (req, res) => {
 
-    const { email, phone, password } = req.body;
+    const { email, phoneNumber, password } = req.body;
 
     // Validate email format using email-validator package
     if (!emailValidator.validate(email)) {
         return res.status(400).json({ error: 'Invalid email format' });
     }
 
+
     // Validate phone number format using phone package
-    if (!phoneValidator.validate(phone)) {
+    if (!validatePhoneNumber.validate(phoneNumber)) {
         return res.status(400).json({ error: 'Invalid phone number format' });
     }
 
