@@ -79,8 +79,10 @@ module.exports.UpdatePassword = async (req, res) => {
             return res.status(400).json({ message: 'User not found' });
         }
 
+        // Hash the password using a secure hashing algorithm such as SHA256
+        const hashedPassword = crypto.createHash('sha256').update(req.body.password).digest('hex');
         // Update the user's password
-        user.password = req.body.password;
+        user.password = hashedPassword;
         await user.save();
 
         // Delete the reset token from the database
