@@ -40,7 +40,7 @@ module.exports.ForgetPassword = async (req, res) => {
                 pass: process.env.MY_PASSWORD, // generated ethereal password
             },
         });
-        const resetUrl = `${req.protocol}://${req.headers.host}/homellc/passwords/reset-password/${token}`;
+        const resetUrl = `${req.protocol}://${req.headers.host}/homellc/passwords/reset-password/${resetToken.token}`;
         await transporter.sendMail({
             from: 'abhijain3002@gmail.com', // sender address
             to: user.email,
@@ -50,6 +50,7 @@ module.exports.ForgetPassword = async (req, res) => {
 
         res.json({ message: 'Password reset instructions sent to your email' });
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: "Something went wrong" });
     }
 };
