@@ -1,7 +1,6 @@
 const UserSchema = require("../models/userModule");
 const crypto = require('crypto');
 const emailValidator = require('email-validator');
-const validatePhoneNumber = require('validate-phone-number-node-js');
 
 module.exports.AddUser = async (req, res) => {
 
@@ -12,9 +11,13 @@ module.exports.AddUser = async (req, res) => {
         return res.status(400).json({ error: 'Invalid email format' });
     }
 
+    function validatePhoneNumber(phoneNumber) {
+        const regex = /^\+(?:[0-9] ?){6,14}[0-9]$/; // This regex matches international phone numbers with or without spaces
+        return regex.test(phoneNumber);
+      }      
 
     // Validate phone number format using phone package
-    if (!validatePhoneNumber.validate(phoneNumber)) {
+    if (!validatePhoneNumber(phoneNumber)) {
         return res.status(400).json({ error: 'Invalid phone number format' });
     }
 
