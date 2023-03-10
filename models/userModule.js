@@ -10,6 +10,10 @@ const schema = mongoose.Schema({
     password: { type: String, required: true },
     remember: { type: Boolean, required: true }
 });
-schema.plugin(uniqueValidator);
+const uniqueOptions = {
+    message: 'Email already exists, please try another one'
+};
+
+schema.plugin(uniqueValidator, uniqueOptions);
 
 module.exports = mongoose.model("users", schema);
