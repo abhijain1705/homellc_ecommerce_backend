@@ -14,7 +14,7 @@ module.exports.AddUser = async (req, res) => {
     function validatePhoneNumber(phoneNumber) {
         const regex = /^\+(?:[0-9] ?){6,14}[0-9]$/; // This regex matches international phone numbers with or without spaces
         return regex.test(phoneNumber);
-      }      
+    }
 
     // Validate phone number format using phone package
     if (!validatePhoneNumber(phoneNumber)) {
@@ -55,8 +55,11 @@ module.exports.LoginUser = async (req, res) => {
             return res.status(401).json({ error: 'Incorrect email or password' });
         }
 
-        // Password is correct, return the user object
-        return res.status(201).json(user);
+        user.remember = req.body.remember;
+        const newUser = new UserSchema({ ...user });
+        await newUser.save()
+            .then(user => res.status(201).json(user))
+            .catch(err => res.status(500).json({ error: err.message }));
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
