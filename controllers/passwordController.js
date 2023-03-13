@@ -14,7 +14,7 @@ module.exports.ForgetPassword = async (req, res) => {
         });
 
         if (!user) {
-            return res.status(400).json({ message: "User not found" });
+            return res.status(400).json({ error: "User not found" });
         }
         // Check if there is an existing reset token document for the user
         let resetToken = await ResetToken.findOne({ email: user.email });
@@ -51,7 +51,7 @@ module.exports.ForgetPassword = async (req, res) => {
         res.json({ message: 'Password reset instructions sent to your email' });
     } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Something went wrong" });
+        res.status(500).json({ error: "Something went wrong" });
     }
 };
 
@@ -62,21 +62,21 @@ module.exports.UpdatePassword = async (req, res) => {
         const resetToken = await ResetToken.findOne({ token: req.params.token });
 
         if (!resetToken) {
-            return res.status(400).json({ message: 'Invalid or expired token' });
+            return res.status(400).json({ error: 'Invalid or expired token' });
         }
 
         // Verify that the token is not expired
         if (resetToken.createdAt < new Date(new Date() - 60 * 60 * 1000)) {
             // Token is expired, delete it from the database and return an error
             await resetToken.delete();
-            return res.status(400).json({ message: 'Token expired' });
+            return res.status(400).json({ error: 'Token expired' });
         }
 
         // Find the user by email
         const user = await User.findOne({ email: resetToken.email });
 
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            return res.status(400).json({ error: 'User not found' });
         }
 
         // Hash the password using a secure hashing algorithm such as SHA256
@@ -90,6 +90,6 @@ module.exports.UpdatePassword = async (req, res) => {
 
         res.json({ message: 'Password reset successful' });
     } catch (error) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ error: 'Something went wrong' });
     }
 };

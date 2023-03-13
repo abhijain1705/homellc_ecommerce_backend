@@ -31,8 +31,8 @@ mongoose
         if (port == null || port == "") {
             port = 8000;
         }
-        console.log("successfully listening on port 5000 after connection")
-        app.listen(process.env.PORT);
+        console.log("successfully listening on port after connection", port)
+        app.listen(port);
     }).catch((e) => {
         console.log("error", e.message);
     })
